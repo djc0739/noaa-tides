@@ -1,0 +1,28 @@
+# --- credentials PG3 writes into the plugin folder (NEVER commit) ---
+*.key
+*.cert
+*.pem
+.iox_env
+.vscode/
+
+# --- runtime / state ---
+logs/
+*.log
+crash.log
+persist/
+svc.pid
+NSplugin_*.lock
+
+# --- python ---
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# --- local-only tool files (machine path, email, hub nsid; scaffold-tool inputs) ---
+server_entry.json
+generation_inputs.json
+
+# --- development notes (optional; remove these lines to publish them) ---
+context.md
+sources.md

@@ -1,0 +1,620 @@
+{
+  "editors": [
+    {
+      "id": "tide_ht",
+      "ranges": [
+        {
+          "uom": "18",
+          "min": -30,
+          "max": 100,
+          "prec": 2
+        },
+        {
+          "uom": "38",
+          "min": -10,
+          "max": 35,
+          "prec": 2
+        }
+      ]
+    },
+    {
+      "id": "temp",
+      "ranges": [
+        {
+          "uom": "17",
+          "min": -60,
+          "max": 150,
+          "prec": 1
+        },
+        {
+          "uom": "4",
+          "min": -50,
+          "max": 65,
+          "prec": 1
+        }
+      ]
+    },
+    {
+      "id": "wind_spd",
+      "ranges": [
+        {
+          "uom": "48",
+          "min": 0,
+          "max": 250,
+          "prec": 1
+        },
+        {
+          "uom": "40",
+          "min": 0,
+          "max": 110,
+          "prec": 1
+        }
+      ]
+    },
+    {
+      "id": "wind_dir",
+      "ranges": [
+        {
+          "uom": "76",
+          "min": 0,
+          "max": 360,
+          "prec": 0
+        }
+      ]
+    },
+    {
+      "id": "pressure",
+      "ranges": [
+        {
+          "uom": "23",
+          "min": 20,
+          "max": 35,
+          "prec": 2
+        },
+        {
+          "uom": "117",
+          "min": 700,
+          "max": 1100,
+          "prec": 1
+        }
+      ]
+    },
+    {
+      "id": "percent",
+      "ranges": [
+        {
+          "uom": "51",
+          "min": 0,
+          "max": 100,
+          "prec": 0
+        }
+      ]
+    },
+    {
+      "id": "minutes",
+      "ranges": [
+        {
+          "uom": "45",
+          "min": 0,
+          "max": 100000,
+          "prec": 0
+        }
+      ]
+    },
+    {
+      "id": "distance",
+      "ranges": [
+        {
+          "uom": "116",
+          "min": 0,
+          "max": 1000,
+          "prec": 1
+        },
+        {
+          "uom": "83",
+          "min": 0,
+          "max": 2000,
+          "prec": 1
+        }
+      ]
+    },
+    {
+      "id": "degrees",
+      "ranges": [
+        {
+          "uom": "14",
+          "min": -180,
+          "max": 180,
+          "prec": 4
+        }
+      ]
+    },
+    {
+      "id": "timestamp",
+      "ranges": [
+        {
+          "uom": "151",
+          "min": 0,
+          "max": 4294967295,
+          "prec": 0
+        }
+      ]
+    },
+    {
+      "id": "count",
+      "ranges": [
+        {
+          "uom": "56",
+          "min": 0,
+          "max": 9999,
+          "prec": 0
+        }
+      ]
+    },
+    {
+      "id": "tide_trend",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2",
+          "names": {
+            "0": "Unknown",
+            "1": "Rising",
+            "2": "Falling"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tide_type",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2",
+          "names": {
+            "0": "--",
+            "1": "High",
+            "2": "Low"
+          }
+        }
+      ]
+    },
+    {
+      "id": "data_status",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2,3",
+          "names": {
+            "0": "No Data",
+            "1": "Current",
+            "2": "Stale",
+            "3": "Error"
+          }
+        }
+      ]
+    },
+    {
+      "id": "obs_status",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2",
+          "names": {
+            "0": "No Data",
+            "1": "Current",
+            "2": "Stale"
+          }
+        }
+      ]
+    },
+    {
+      "id": "stn_kind",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1",
+          "names": {
+            "0": "Reference",
+            "1": "Subordinate"
+          }
+        }
+      ]
+    },
+    {
+      "id": "obs_src",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2",
+          "names": {
+            "0": "None",
+            "1": "This Station",
+            "2": "Nearby Station"
+          }
+        }
+      ]
+    },
+    {
+      "id": "moon_phase",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2,3,4,5,6,7",
+          "names": {
+            "0": "New Moon",
+            "1": "Waxing Crescent",
+            "2": "First Quarter",
+            "3": "Waxing Gibbous",
+            "4": "Full Moon",
+            "5": "Waning Gibbous",
+            "6": "Last Quarter",
+            "7": "Waning Crescent"
+          }
+        }
+      ]
+    },
+    {
+      "id": "noaa_status",
+      "ranges": [
+        {
+          "uom": "25",
+          "subset": "0,1,2,3,4",
+          "names": {
+            "0": "Unknown",
+            "1": "Online",
+            "2": "Degraded",
+            "3": "Rate Limited",
+            "4": "Offline"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ED_CONTROLLER_ST",
+      "ranges": [
+        {
+          "subset": "0,1",
+          "uom": "25",
+          "names": {
+            "0": "Not Connected",
+            "1": "Connected"
+          }
+        }
+      ]
+    }
+  ],
+  "nodedefs": [
+    {
+      "id": "controller",
+      "name": "NOAA Tides",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Status",
+          "editor": "ED_CONTROLLER_ST"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": [
+          {
+            "id": "DISCOVER",
+            "name": "Reload Stations",
+            "native": "false"
+          },
+          {
+            "id": "UPDATE",
+            "name": "Update Now",
+            "native": "false"
+          }
+        ]
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "noaa_status",
+      "name": "NOAA Service Status",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "NOAA Service",
+          "editor": "noaa_status"
+        },
+        {
+          "id": "LAST_OK",
+          "name": "Last Successful Update",
+          "editor": "timestamp"
+        },
+        {
+          "id": "STN_COUNT",
+          "name": "Stations",
+          "editor": "count"
+        },
+        {
+          "id": "STALE_COUNT",
+          "name": "Stations With Stale Data",
+          "editor": "count"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": []
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "tide_station",
+      "name": "Tide Station (Predicted)",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Prediction Data",
+          "editor": "data_status"
+        },
+        {
+          "id": "TIDELVL",
+          "name": "Estimated Height",
+          "editor": "tide_ht"
+        },
+        {
+          "id": "TREND",
+          "name": "Tide Trend",
+          "editor": "tide_trend"
+        },
+        {
+          "id": "NEXT_TYPE",
+          "name": "Next Tide",
+          "editor": "tide_type"
+        },
+        {
+          "id": "NEXT_HT",
+          "name": "Next Tide Height",
+          "editor": "tide_ht"
+        },
+        {
+          "id": "TIMEREM",
+          "name": "Next Tide In",
+          "editor": "minutes"
+        },
+        {
+          "id": "HIGH_HT",
+          "name": "Next High Height",
+          "editor": "tide_ht"
+        },
+        {
+          "id": "HIGH_MIN",
+          "name": "Next High In",
+          "editor": "minutes"
+        },
+        {
+          "id": "HIGH_TIME",
+          "name": "Next High At",
+          "editor": "timestamp"
+        },
+        {
+          "id": "LOW_HT",
+          "name": "Next Low Height",
+          "editor": "tide_ht"
+        },
+        {
+          "id": "LOW_MIN",
+          "name": "Next Low In",
+          "editor": "minutes"
+        },
+        {
+          "id": "LOW_TIME",
+          "name": "Next Low At",
+          "editor": "timestamp"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": []
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "tide_table",
+      "name": "Tide Table (Predicted)",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Today's Tide Range",
+          "editor": "tide_ht"
+        },
+        {
+          "id": "TMRW_RANGE",
+          "name": "Tomorrow's Tide Range",
+          "editor": "tide_ht"
+        },
+        {
+          "id": "TODAY_1",
+          "name": "Today - Tide 1",
+          "editor": "tide_type"
+        },
+        {
+          "id": "TODAY_2",
+          "name": "Today - Tide 2",
+          "editor": "tide_type"
+        },
+        {
+          "id": "TODAY_3",
+          "name": "Today - Tide 3",
+          "editor": "tide_type"
+        },
+        {
+          "id": "TODAY_4",
+          "name": "Today - Tide 4",
+          "editor": "tide_type"
+        },
+        {
+          "id": "TMRW_1",
+          "name": "Tomorrow - Tide 1",
+          "editor": "tide_type"
+        },
+        {
+          "id": "TMRW_2",
+          "name": "Tomorrow - Tide 2",
+          "editor": "tide_type"
+        },
+        {
+          "id": "TMRW_3",
+          "name": "Tomorrow - Tide 3",
+          "editor": "tide_type"
+        },
+        {
+          "id": "TMRW_4",
+          "name": "Tomorrow - Tide 4",
+          "editor": "tide_type"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": []
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "tide_observed",
+      "name": "Observed Conditions",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Observation Data",
+          "editor": "obs_status"
+        },
+        {
+          "id": "TIDELVL",
+          "name": "Observed Water Level",
+          "editor": "tide_ht"
+        },
+        {
+          "id": "SURGE",
+          "name": "Water Level vs Predicted",
+          "editor": "tide_ht"
+        },
+        {
+          "id": "WATERT",
+          "name": "Water Temperature",
+          "editor": "temp"
+        },
+        {
+          "id": "TEMPOUT",
+          "name": "Air Temperature",
+          "editor": "temp"
+        },
+        {
+          "id": "SPEED",
+          "name": "Wind Speed",
+          "editor": "wind_spd"
+        },
+        {
+          "id": "GUST",
+          "name": "Wind Gust",
+          "editor": "wind_spd"
+        },
+        {
+          "id": "WINDDIR",
+          "name": "Wind Direction",
+          "editor": "wind_dir"
+        },
+        {
+          "id": "BARPRES",
+          "name": "Barometric Pressure",
+          "editor": "pressure"
+        },
+        {
+          "id": "CLIHUM",
+          "name": "Humidity",
+          "editor": "percent"
+        },
+        {
+          "id": "OBS_AGE",
+          "name": "Reading Age",
+          "editor": "minutes"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": []
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    },
+    {
+      "id": "tide_info",
+      "name": "Station Info",
+      "properties": [
+        {
+          "id": "ST",
+          "name": "Station Type",
+          "editor": "stn_kind"
+        },
+        {
+          "id": "LATITUDE",
+          "name": "Latitude",
+          "editor": "degrees"
+        },
+        {
+          "id": "LONGITUDE",
+          "name": "Longitude",
+          "editor": "degrees"
+        },
+        {
+          "id": "OBS_SRC",
+          "name": "Observation Source",
+          "editor": "obs_src"
+        },
+        {
+          "id": "DISTANC",
+          "name": "Observation Distance",
+          "editor": "distance"
+        },
+        {
+          "id": "SUNRISE",
+          "name": "Sunrise",
+          "editor": "timestamp"
+        },
+        {
+          "id": "SUNSET",
+          "name": "Sunset",
+          "editor": "timestamp"
+        },
+        {
+          "id": "MOON",
+          "name": "Moon Phase",
+          "editor": "moon_phase"
+        },
+        {
+          "id": "MOON_ILLUM",
+          "name": "Moon Illumination",
+          "editor": "percent"
+        }
+      ],
+      "cmds": {
+        "sends": [],
+        "accepts": []
+      },
+      "links": {
+        "ctl": [],
+        "rsp": []
+      }
+    }
+  ],
+  "linkdefs": []
+}
