@@ -277,6 +277,8 @@ Definitions marked (NOAA) are shortened from the
 
 ## Version history
 
+* **1.3.2** - The plugin's Configuration tab now shows a short quick-setup guide (the same steps as Setup below).
+  No change to how tides, observations or nodes work.
 * **1.3.1** - Documentation only: step-by-step setup with Save reminders, finding a station with NOAA's zip-code
   search, a glossary, notification variable tables, and a plain MIT license. The plugin's behavior is unchanged.
 * **1.3.0** - Nodes now list only the properties they really report, so Humidity, Water Level vs Predicted and similar

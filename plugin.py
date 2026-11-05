@@ -24,7 +24,6 @@ class Controller(udi_interface.Node):
         self.CustomTypedParams = udi_interface.Custom(self.poly, 'customtypedparams')
         self.CustomTypedData = udi_interface.Custom(self.poly, 'customtypeddata')
         self.CustomTypedParams.load([{'name': 'useMetric', 'title': 'Use metric units', 'type': 'BOOLEAN', 'defaultValue': False, 'desc': 'Off = English units (feet, F, mph, inHg, miles). On = Metric (meters, C, m/s, millibars, km). NOAA data is fetched once and converted locally, so changing this never causes extra NOAA requests.'}, {'name': 'obsPollMinutes', 'title': 'Observation poll interval (minutes)', 'type': 'NUMBER', 'defaultValue': 10, 'desc': 'How often observed data (water level, temperatures, wind, pressure) is requested from NOAA. NOAA publishes new readings every 6 minutes, so the minimum is 6; values above 120 are treated as 120. Default 10 keeps request volume low. Predictions are cached and fetched about once a day regardless of this setting.'}, {'name': 'stations', 'title': 'Tide stations', 'isList': True, 'desc': 'One entry per tide station (one set of nodes each). The list starts empty: no station is pre-selected. Not sure which station to use? Browse the NOAA map at https://tidesandcurrents.noaa.gov/map/ and copy the Station ID, or enter your boat or dock position as lat,lon to get the nearest station (nearby alternatives are listed in the plugin notices).', 'params': [{'name': 'station', 'title': 'Station ID, name, or lat,lon', 'type': 'STRING', 'isRequired': True, 'desc': "Enter ONE of: a NOAA station ID (the number shown on the station's page on the NOAA map), a station name (optionally followed by a comma and the 2-letter state to narrow it down), or a position as latitude,longitude in decimal degrees to use the nearest station. If a name matches several stations, none is added and the matching IDs are shown in the plugin notices."}, {'name': 'obsStation', 'title': 'Observation station (optional)', 'type': 'STRING', 'isRequired': False, 'desc': 'Leave blank to automatically use this station if it has sensors, otherwise the nearest NOAA water level station within 50 nautical miles. Enter a station ID to choose a specific observation station, or the word none to disable observed data for this station.'}]}], True)
-        # Additional node classes (tide_nodes) -- construct and self.poly.addNode() them from discover()/start() once their real addresses/names are known (run candidate names/addresses through self.poly.getValidName()/getValidAddress() first).
         self.poly.subscribe(self.poly.START, self.__start, address)
         self.poly.subscribe(self.poly.STOP, self.__stop)
         self.poly.subscribe(self.poly.POLL, self.__poll)
@@ -89,7 +88,19 @@ class Controller(udi_interface.Node):
     # --- developer-authored overrides (edit freely; regeneration preserves them) ---
 
     def start(self):
+        import os
         import tide_nodes
+        # Send the Configuration-tab help (POLYGLOT_CONFIG.md) to PG3. getMarkDownData finds a bare file name
+        # only relative to the working directory, so build an absolute path and convert it to HTML.
+        try:
+            doc = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'POLYGLOT_CONFIG.md')
+            html = self.poly.getMarkDownData(doc)
+            if html:
+                self.poly.setCustomParamsDoc(str(html))
+            else:
+                LOGGER.warning('Configuration help not sent: %s is missing or empty', doc)
+        except Exception:
+            LOGGER.exception('Could not send the configuration help')
         tide_nodes.start(self)
 
     def stop(self):
