@@ -206,6 +206,72 @@ after five minutes.
 * Tidal **currents** (speed and direction) use separate station IDs and depth bins and are not included in this
   version.
 
+## Troubleshooting
+
+**Where to look first.** The plugin's page in eisy-ui shows notices at the top. They explain most problems in plain
+words, such as a station that was not found or a name that matched several stations. Warnings and errors are also
+written to the plugin log. Open it with the **Log Viewer** button on the plugin's page.
+
+**No nodes appeared after I added a station**
+
+* Did you click **Save** under the section you edited? Nothing takes effect until you do.
+* Wait about a minute, then check the notices at the top of the plugin page.
+* If you use the Admin Console, close and reopen it to see new nodes.
+* Run **Reload Stations** on the controller node.
+
+**A notice says a name matched several stations**
+
+* The name was too short to be unique. `Montauk` alone matches three stations. The notice lists their station IDs;
+  enter the ID of the one you want.
+
+**A notice says no station was found near my position**
+
+* Check the minus sign. US longitudes are negative, for example `41.05,-71.96`. Latitude comes first, then longitude.
+
+**The Observed node shows No Data or Stale**
+
+* Not every tide station has weather sensors. By default the plugin then uses the nearest NOAA water level station
+  within 50 nautical miles (see "Observation source"). The Info node shows which station is in use and how far away it is.
+* If you typed `none` in **Observation station (optional)**, observed data is turned off for that station.
+* **Stale** means no new reading arrived for 30 minutes, or for 3 poll intervals. **Reading Age** shows the age of the
+  newest reading in minutes.
+* Some properties, such as humidity, only appear on stations whose sensors report them.
+
+**The NOAA Service Status node shows Degraded, Rate Limited or Offline**
+
+* *Degraded:* some recent requests failed. This usually clears by itself.
+* *Rate Limited:* NOAA asked the plugin to slow down. It waits 1 to 15 minutes and retries by itself. If you have many
+  stations, raise the observation poll interval.
+* *Offline:* repeated failures. Check that your eisy can reach the internet, and check NOAA's own web site.
+  Predictions already saved on disk keep working.
+
+**Prediction Data shows Stale**
+
+* The saved predictions are older than 48 hours, or no future tides remain in them. The plugin refreshes them about
+  once a day when NOAA is reachable. **Update Now** forces a refresh.
+
+**A node is missing, or shows an empty row**
+
+* If the eisy refuses a node, the plugin writes the reason to the log and retries automatically, after 30 seconds and
+  then at longer intervals up to 10 minutes. Saving the configuration retries immediately. See "How nodes are created".
+
+**Wrong units, or values that look off**
+
+* Check **Use metric units** and save. Heights are measured from MLLW, so a negative height means below the average
+  lower-low-water level.
+
+**Asking for help.** Send these:
+
+* the plugin version (shown on the plugin's page), the station ID, and what the notices say;
+* the plugin log: click **Log Download** on the plugin's page and attach the file. A whole file is more useful than a
+  few pasted lines, because the cause is often earlier than the moment you noticed the problem. The log starts a new
+  file at midnight, so download it soon after the problem happens.
+
+**Before you share a log:** at every start the plugin writes a line containing `PG3INIT=` to the log. It holds a
+temporary key that lets programs talk to your eisy. It stops working when the plugin restarts, but do not post it
+publicly. Open the downloaded file in a text editor and delete every line containing `PG3INIT` before attaching it to
+a public page such as a GitHub issue. Sending the file privately to the person helping you is fine as it is.
+
 ## Using the values in notifications
 
 Every property can be used in Programs, and in notification and email text with IoX substitution variables:
@@ -277,6 +343,7 @@ Definitions marked (NOAA) are shortened from the
 
 ## Version history
 
+* **1.3.3** - Documentation only: added a Troubleshooting section, including how to get the plugin log. No change to how tides, observations or nodes work.
 * **1.3.2** - The plugin's Configuration tab now shows a short quick-setup guide (the same steps as Setup below).
   No change to how tides, observations or nodes work.
 * **1.3.1** - Documentation only: step-by-step setup with Save reminders, finding a station with NOAA's zip-code
