@@ -338,6 +338,7 @@ Definitions marked (NOAA) are shortened from the
 
 ## Version history
 
+* **1.3.5** - The two web addresses in the Configuration help are now shown in bold. No change to how tides, observations or nodes work.
 * **1.3.4** - Documentation only: removed a note from the Troubleshooting section that is no longer needed. No change to how tides, observations or nodes work.
 * **1.3.3** - Documentation only: added a Troubleshooting section, including how to get the plugin log. No change to how tides, observations or nodes work.
 * **1.3.2** - The plugin's Configuration tab now shows a short quick-setup guide (the same steps as Setup below).
