@@ -267,11 +267,6 @@ written to the plugin log. Open it with the **Log Viewer** button on the plugin'
   few pasted lines, because the cause is often earlier than the moment you noticed the problem. The log starts a new
   file at midnight, so download it soon after the problem happens.
 
-**Before you share a log:** at every start the plugin writes a line containing `PG3INIT=` to the log. It holds a
-temporary key that lets programs talk to your eisy. It stops working when the plugin restarts, but do not post it
-publicly. Open the downloaded file in a text editor and delete every line containing `PG3INIT` before attaching it to
-a public page such as a GitHub issue. Sending the file privately to the person helping you is fine as it is.
-
 ## Using the values in notifications
 
 Every property can be used in Programs, and in notification and email text with IoX substitution variables:
@@ -343,6 +338,7 @@ Definitions marked (NOAA) are shortened from the
 
 ## Version history
 
+* **1.3.4** - Documentation only: removed a note from the Troubleshooting section that is no longer needed. No change to how tides, observations or nodes work.
 * **1.3.3** - Documentation only: added a Troubleshooting section, including how to get the plugin log. No change to how tides, observations or nodes work.
 * **1.3.2** - The plugin's Configuration tab now shows a short quick-setup guide (the same steps as Setup below).
   No change to how tides, observations or nodes work.
