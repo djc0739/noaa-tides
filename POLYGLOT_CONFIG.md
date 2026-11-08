@@ -19,4 +19,4 @@ Zip codes are not accepted here, but NOAA's website accepts them. Go to **https:
 
 ## More help
 
-The full documentation covers the nodes and properties, notification variables, polling limits and a glossary of tide terms: **https://github.com/djc0739/my-eisy-plugins/blob/main/noaa_tides/README.md**
+The full documentation covers the nodes and properties, notification variables, polling limits and a glossary of tide terms: **https://github.com/djc0739/noaa-tides/blob/main/README.md**
