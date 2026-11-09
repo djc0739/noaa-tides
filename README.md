@@ -338,25 +338,16 @@ Definitions marked (NOAA) are shortened from the
 
 ## Version history
 
-* **1.3.6** - The plugin now has its own GitHub repository (github.com/djc0739/noaa-tides). Documentation links updated. No change to how tides, observations or nodes work.
-* **1.3.5** - The two web addresses in the Configuration help are now shown in bold. No change to how tides, observations or nodes work.
-* **1.3.4** - Documentation only: removed a note from the Troubleshooting section that is no longer needed. No change to how tides, observations or nodes work.
-* **1.3.3** - Documentation only: added a Troubleshooting section, including how to get the plugin log. No change to how tides, observations or nodes work.
-* **1.3.2** - The plugin's Configuration tab now shows a short quick-setup guide (the same steps as Setup below).
-  No change to how tides, observations or nodes work.
-* **1.3.1** - Documentation only: step-by-step setup with Save reminders, finding a station with NOAA's zip-code
-  search, a glossary, notification variable tables, and a plain MIT license. The plugin's behavior is unchanged.
-* **1.3.0** - Nodes now list only the properties they really report, so Humidity, Water Level vs Predicted and similar
-  rows no longer appear empty. Sunrise, Sunset, Moon Phase and Moon Illumination now work on every install: they are
-  calculated by the plugin itself instead of by an add-on library that was not available to the running plugin. The
-  `astral` requirement is gone. Existing Info and Observed nodes are rebuilt once (same names and addresses).
-* **1.2.2** - All four nodes of a station share one short station name (the part of NOAA's name before the first
-  comma, cut at a word boundary if needed).
-* **1.2.1** - Shorter node names (24 characters or fewer) that no longer carry the state, station ID or observation
-  source; existing nodes are renamed in place.
-* **1.2.0** - Flat node layout (every node directly under the controller) after the eisy refused nested nodes;
-  nodes are only treated as created once the eisy confirms them; US-format date label for Next High / Next Low At.
-* **1.1.0** - Added Next High At and Next Low At.
+* **1.3.7** - The web addresses in the Configuration help open in a new browser tab. No change to how tides,
+  observations or nodes work.
+* **1.3.1 - 1.3.6** - Documentation and Configuration-help improvements only: step-by-step setup, a quick-setup guide
+  on the plugin's Configuration tab, a Troubleshooting section, a glossary and notification variable tables. No change
+  to how tides, observations or nodes work.
+* **1.3.0** - Nodes list only the properties they really report, so Humidity, Water Level vs Predicted and similar
+  rows no longer appear empty. Sunrise, Sunset, Moon Phase and Moon Illumination are now calculated by the plugin
+  itself and work on every install.
+* **1.1.0 - 1.2.2** - Added Next High At and Next Low At. Every node sits directly under the controller. Shorter node
+  names that share one station name.
 * **1.0.0** - Initial version.
 
 ## Data source

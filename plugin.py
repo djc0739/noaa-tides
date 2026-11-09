@@ -91,17 +91,19 @@ class Controller(udi_interface.Node):
     def start(self):
         import os
         import tide_nodes
-        # Send the Configuration-tab help (POLYGLOT_CONFIG.md) to PG3. getMarkDownData finds a bare file name
-        # only relative to the working directory, so build an absolute path and convert it to HTML.
+        # Send the Configuration-tab help (POLYGLOT_CONFIG.md) to PG3 as raw Markdown, not converted to HTML.
+        # The eisy-ui help panel strips target="_blank" from HTML links but renders Markdown links with
+        # target="_blank", so Markdown is what makes the links open in a new tab. Keep HTML tags out of the file.
         try:
             doc = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'POLYGLOT_CONFIG.md')
-            html = self.poly.getMarkDownData(doc)
-            if html:
-                self.poly.setCustomParamsDoc(str(html))
+            with open(doc, 'r', encoding='utf-8') as fh:
+                text = fh.read()
+            if text.strip():
+                self.poly.setCustomParamsDoc(text)
             else:
-                LOGGER.warning('Configuration help not sent: %s is missing or empty', doc)
+                LOGGER.warning('Configuration help not sent: %s is empty', doc)
         except Exception:
-            LOGGER.exception('Could not send the configuration help')
+            LOGGER.exception('Could not send the configuration help (POLYGLOT_CONFIG.md)')
         tide_nodes.start(self)
 
     def stop(self):

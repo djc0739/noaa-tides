@@ -15,8 +15,8 @@ Changes to **Use metric units** or **Observation poll interval (minutes)** also 
 
 ## Finding a station
 
-Zip codes are not accepted here, but NOAA's website accepts them. Go to **https://tidesandcurrents.noaa.gov** and enter your zip code, city or state in the Search box. Pick a station, copy its Station ID into the field above, and click **Save**.
+Zip codes are not accepted here, but NOAA's website accepts them. Go to [https://tidesandcurrents.noaa.gov](https://tidesandcurrents.noaa.gov) and enter your zip code, city or state in the Search box. Pick a station, copy its Station ID into the field above, and click **Save**.
 
 ## More help
 
-The full documentation covers the nodes and properties, notification variables, polling limits and a glossary of tide terms: **https://github.com/djc0739/noaa-tides/blob/main/README.md**
+The full documentation covers the nodes and properties, notification variables, polling limits and a glossary of tide terms: [https://github.com/djc0739/noaa-tides/blob/main/README.md](https://github.com/djc0739/noaa-tides/blob/main/README.md)
