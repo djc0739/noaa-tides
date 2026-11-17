@@ -39,6 +39,7 @@ OBS_MAX_DIST_NM = 50.0
 MIN_OBS_MIN = 6            # NOAA publishes new observations every 6 minutes
 STALE_PRED_S = 48 * 3600
 PRED_RETRY_S = 1800
+ZERO_HOLD_MAX_S = 180      # a tide that passed longer ago than this is no longer announced as 0 minutes
 ADD_WAIT_S = 20.0          # how long to wait for the hub to answer one addNode
 ADD_RETRY_FIRST_S = 30     # first retry delay after the hub refuses a node
 ADD_RETRY_MAX_S = 600      # retry delay cap
@@ -941,7 +942,32 @@ def _set(node, drv, value, uom=None, text=None, force=False):
 
 
 def _mins(epoch, now):
-    return max(0, int(round((epoch - now) / 60.0)))
+    '''Whole minutes until epoch, rounded DOWN and never negative.
+
+    Rounding down (not to the nearest minute) means the last 60 seconds before a tide read 0, a full
+    poll interval wide, so a Program testing 'Next Tide In is 0' has a whole window to catch it. With
+    round() the value read 0 only within 30 seconds of the tide, which a 60 second poll often missed.
+    '''
+    return max(0, int((epoch - now) // 60))
+
+
+def tide_minutes(hold, key, ev, now, label):
+    '''Minutes to show for a countdown (Next Tide / High / Low In), guaranteeing one 0 per tide.
+
+    hold is a dict kept per station, key names the countdown, ev is the tide it now counts down to and
+    label its time text. If the tide this countdown showed last has passed without a 0 ever being
+    reported (a poll landed outside the 60 second window, or was late), report 0 once now, with that
+    tide's own label, then carry on with ev. Nothing is invented for a tide that passed more than
+    ZERO_HOLD_MAX_S ago (a long pause, a plugin restart, a clock jump).
+    '''
+    m = _mins(ev['epoch'], now)
+    h = hold.get(key)
+    if h and h['epoch'] != ev['epoch'] and not h['zero'] and 0 <= now - h['epoch'] <= ZERO_HOLD_MAX_S:
+        hold[key] = {'epoch': h['epoch'], 'zero': True, 'label': h['label']}
+        return 0, h['label']
+    zero = m == 0 or bool(h and h['epoch'] == ev['epoch'] and h['zero'])
+    hold[key] = {'epoch': ev['epoch'], 'zero': zero, 'label': label}
+    return m, label
 
 
 def _db_nodes(poly):
@@ -1309,6 +1335,7 @@ def _push_station(ctl, st, now, force=False):
     comp = compute_tides(st['events'], now)
     nodes = st['nodes']
     today = comp['today_date']
+    hold = st.setdefault('zhold', {})
 
     n = nodes.get('tide')
     if n is not None:
@@ -1320,15 +1347,18 @@ def _push_station(ctl, st, now, force=False):
         if nx:
             _set(n, 'NEXT_TYPE', 1 if nx['type'] == 'H' else 2, force=force)
             _set(n, 'NEXT_HT', conv_ht(nx['v'], metric), uom=u['ht'], force=force)
-            _set(n, 'TIMEREM', _mins(nx['epoch'], now), text=fmt_when(nx['epoch'], nx['off'], today), force=force)
+            mins, label = tide_minutes(hold, 'next', nx, now, fmt_when(nx['epoch'], nx['off'], today))
+            _set(n, 'TIMEREM', mins, text=label, force=force)
         for key, hkey, mkey, tkey in (('high', 'HIGH_HT', 'HIGH_MIN', 'HIGH_TIME'),
                                       ('low', 'LOW_HT', 'LOW_MIN', 'LOW_TIME')):
             ev = comp[key]
             if ev:
                 _set(n, hkey, conv_ht(ev['v'], metric), uom=u['ht'], force=force)
-                _set(n, mkey, _mins(ev['epoch'], now), text=fmt_when(ev['epoch'], ev['off'], today), force=force)
-                # Time of the tide: the predicted event's own timestamp (what now + minutes*60 rounds to),
-                # with a US-format MM/DD/YYYY h:MM AM/PM label in the station's local time.
+                mins, label = tide_minutes(hold, key, ev, now, fmt_when(ev['epoch'], ev['off'], today))
+                _set(n, mkey, mins, text=label, force=force)
+                # Time of the tide: the predicted event's own timestamp (the minutes value above is that
+                # time rounded down to the minute), with a US-format MM/DD/YYYY h:MM AM/PM label in the
+                # station's local time.
                 _set(n, tkey, int(ev['epoch']), text=fmt_us(ev['epoch'], ev['off']), force=force)
 
     n = nodes.get('table')

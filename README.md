@@ -71,8 +71,9 @@ UTC offset: the local time shown is 5 hours behind UTC (US Eastern Standard Time
 The plugin also sends a US-format text label, `MM/DD/YYYY h:MM AM/PM` in the station's local time (for example
 `11/04/2026 12:48 AM`), with the timestamp. The eisy console does not show that label for a timestamp property (it
 shows the ISO text above), but other screens may. The values are calculated from the same predicted event the
-minutes values use, so they always agree with "Next High In" / "Next Low In", and they only change when the tide
-itself rolls over to the next one.
+minutes values use, so they agree with "Next High In" / "Next Low In" (which count whole minutes, rounded down), and they
+change when the tide itself rolls over to the next one. For one update after a tide passes, the "In" value can still
+show 0 for that tide while "At" already shows the following one.
 
 ### Sunrise, sunset and moon phase
 
@@ -288,6 +289,14 @@ name (for example Rising or High) and a number shows its unit. For example, the 
 sent `Trend: Rising Next: High Height: 0.26 feet`, both from a Program's Run Then and from a time condition. The
 Values column below lists the number behind each choice. "In" values are minutes and "At" values are Unix timestamps.
 
+**Programs that fire when a tide arrives.** The "In" values (`TIMEREM`, `HIGH_MIN`, `LOW_MIN`) count whole minutes,
+rounded down, so they read **0** during the last minute before the tide. From 1.3.8 every tide gets a 0: if an update
+happens to land just after the tide, one 0 is still shown for it before the countdown moves on to the following tide.
+IoX evaluates a Status condition when the property changes, so a Program with the condition `Next Low In is 0`
+(or `Next High In is 0`, `Next Tide In is 0`) runs once per tide. A time condition added to it, for example between
+6:00 AM and 10:00 PM, limits it to those hours; a tide outside them is simply skipped. Before 1.3.8 the 0 was often
+skipped, because the value was rounded to the nearest minute and the very next update had already moved on.
+
 | Node | Property id | Shows | Values |
 |------|-------------|-------|--------|
 | Tides | `ST` | Prediction Data | 0 No Data, 1 Current, 2 Stale, 3 Error |
@@ -338,6 +347,10 @@ Definitions marked (NOAA) are shortened from the
 
 ## Version history
 
+* **1.3.8** - Next Tide In, Next High In and Next Low In now show 0 once for every tide, so a Program using
+  `... is 0` reliably runs. Before, the countdown was rounded to the nearest minute and then moved straight on to the
+  next tide, so the 0 was often skipped. It now rounds down (it reads 0 during the last minute), and a tide that passes
+  without a 0 having been shown gets one 0. No new nodes or properties.
 * **1.3.7** - The web addresses in the Configuration help open in a new browser tab. No change to how tides,
   observations or nodes work.
 * **1.3.1 - 1.3.6** - Documentation and Configuration-help improvements only: step-by-step setup, a quick-setup guide
